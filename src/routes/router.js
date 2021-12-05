@@ -12,7 +12,7 @@ import UserItemPage from "../resources/views/user_items_page/user_item.page";
 const MainRouter = () => {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <BrowserRouter basename="/ulos">
         <Routes>
           <Route exact path="/" element={<Layout />}>
             <Route

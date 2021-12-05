@@ -41,16 +41,16 @@ const ItemCardCommon = ({
 
   return (
     <React.Fragment>
-      <div className="succ-err-res transition delay-200 transform hover:-translate-y-2 rounded">
+      <div className="w-full succ-err-res transition delay-200 transform hover:-translate-y-2 rounded">
         <div className="w-full h-96 flex items-center justify-center">
           <img
-            className="succ-err-res object-fit w-full h-full rounded"
+            className="succ-err-res object-cover w-full h-full rounded"
             src={img}
             alt={id}
           />
         </div>
         <div className="flex flex-row justify-between items-center gap-6">
-          <div>
+          <div className="truncate">
             <h2 className="font-bold py-1 truncate">{item}</h2>
           </div>
 

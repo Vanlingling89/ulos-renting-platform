@@ -30,7 +30,7 @@ const AddRentalForm = () => {
     validationSchema: Yup.object({
       item: Yup.string()
         .required("This field is required")
-        .max(100, "Maximum of 100 characters"),
+        .max(30, "Maximum of 100 characters"),
       description: validationString,
       img: Yup.mixed().required("This field is required"),
       price: validationNumber,
