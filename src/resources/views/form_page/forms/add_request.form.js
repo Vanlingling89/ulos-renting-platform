@@ -33,7 +33,10 @@ const AddRequestForm = () => {
       description: validationString,
       location: validationString,
       range_from: validationNumber,
-      range_to: validationNumber,
+      range_to: validationNumber.moreThan(
+        Yup.ref("range_from"),
+        "Range to must be higher than Range From"
+      ),
     }),
     onSubmit: async (values) => {
       renderBusy(true);

@@ -1,11 +1,38 @@
-import React from "react";
-import { itemFakeData } from "../item.fakedata";
+import React, { useEffect } from "react";
 import ItemCardCommon from "../../../common/item_card.common";
 import { useGlobalContext } from "../../../../providers/global_provider/global.context";
 import CardLoadingCommon from "../../../common/card_loading.common";
+import RentalService from "../../../../service/rental.service";
+import { useRentalContext } from "../../../../providers/browse_provider/browse.context";
+import { RENTAL_ACTION_TYPE } from "../../../../providers/browse_provider/browse.reducer";
 
 const DisplayItemComponent = () => {
   const { global } = useGlobalContext();
+  const { rental, rentalDispatch } = useRentalContext();
+  const fetchRentalOnLoad = async () => {
+    rentalDispatch({ type: RENTAL_ACTION_TYPE.setBusy, payload: true });
+    await RentalService.getAllRentals()
+      .then((res) => {
+        if (res.length === 0) {
+          rentalDispatch({
+            type: RENTAL_ACTION_TYPE.setAllRentals,
+            payload: null,
+          });
+        } else {
+          rentalDispatch({
+            type: RENTAL_ACTION_TYPE.setAllRentals,
+            payload: res,
+          });
+        }
+      })
+      .catch((err) => console.log(err.message));
+    rentalDispatch({ type: RENTAL_ACTION_TYPE.setBusy, payload: false });
+  };
+
+  useEffect(() => {
+    fetchRentalOnLoad();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [global.refresh]);
 
   if (global.online === false) {
     return (
@@ -17,19 +44,31 @@ const DisplayItemComponent = () => {
     );
   }
 
+  if (rental.allRentals === null) {
+    return (
+      <div className="flex flex-row w-full h-80 justify-center items-center text-center">
+        <h2>There are no for rental items at the moment...</h2>
+      </div>
+    );
+  }
+
   return (
     <React.Fragment>
-      {global.loading === false ? (
+      {rental.loading === false ? (
         <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-4 lg:justify-items-stretch gap-6">
-          {itemFakeData.map((item, key) => {
-            let { product, stars, price, img } = item;
+          {rental?.allRentals?.map((element) => {
+            let { item, likes, price, img_url, id_ren, img_path, id_user } =
+              element;
             return (
               <ItemCardCommon
-                key={key}
-                product={product}
-                stars={stars}
+                key={id_ren}
+                id={id_ren}
+                user={id_user}
+                item={item}
+                likes={likes.length}
                 price={price}
-                img={img}
+                img={img_url}
+                path={img_path}
               />
             );
           })}

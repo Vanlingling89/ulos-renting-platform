@@ -1,22 +1,92 @@
-import React from "react";
-import { AiFillStar } from "react-icons/ai";
+import React, { useState } from "react";
+import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
+import useResponseHelper from "../../helpers/custom_hooks/use_response.helper";
+import { useGlobalContext } from "../../providers/global_provider/global.context";
+import { GLOBAL_ACTION_TYPE } from "../../providers/global_provider/global.reducer";
+import RentalService from "../../service/rental.service";
 
-const ItemCardCommon = ({ product, stars, price, img }) => {
+const ItemCardCommon = ({
+  id,
+  user,
+  item,
+  likes,
+  price,
+  img,
+  favorite = false,
+  path,
+}) => {
+  const { global, globalDispatch } = useGlobalContext();
+  const { renderSucceed, renderFail, renderBusy } = useResponseHelper();
+  const [favItem, setFavItem] = useState(favorite);
+  const [likesItem, setLikesItem] = useState(parseInt(likes));
+
+  const likeOrUnlike = () => {
+    if (favItem === false) {
+      setLikesItem(parseInt(likesItem) + 1);
+    } else {
+      setLikesItem(parseInt(likesItem) - 1);
+    }
+  };
+
+  const deleteRental = async (itemId, imgPath) => {
+    renderBusy(true);
+    await RentalService.removeRental(itemId, imgPath)
+      .then(() => {
+        renderSucceed({ message: "Delete item: " + itemId });
+        globalDispatch({ type: GLOBAL_ACTION_TYPE.setReload });
+      })
+      .catch((err) => renderFail({ message: err.message }));
+    renderBusy(false);
+  };
+
   return (
     <React.Fragment>
-      <div className="transition delay-200 transform hover:-translate-y-2 rounded">
-        <div className="h-96">
+      <div className="succ-err-res transition delay-200 transform hover:-translate-y-2 rounded">
+        <div className="w-full h-96 flex items-center justify-center">
           <img
-            className="object-cover h-full rounded"
+            className="succ-err-res object-fit w-full h-full rounded"
             src={img}
-            alt={product}
+            alt={id}
           />
         </div>
-        <h2 className="font-bold py-1">{product}</h2>
-        <div className="flex flex-row items-center">
-          <StarCounter starCount={stars} />
-          <p className="pl-2">({stars})</p>
+        <div className="flex flex-row justify-between items-center gap-6">
+          <div>
+            <h2 className="font-bold py-1 truncate">{item}</h2>
+          </div>
+
+          {user === global.currentUser?.uid ? (
+            <div onClick={() => deleteRental(id, path)}>
+              <p className="text-red-600 hover:text-red-800 text-sm cursor-pointer">
+                REMOVE
+              </p>
+            </div>
+          ) : null}
         </div>
+
+        <div className="flex flex-row gap-6 items-center">
+          <div className="flex flex-row items-center justify-center">
+            <div
+              onClick={() => {
+                setFavItem(!favItem);
+                likeOrUnlike();
+              }}
+            >
+              {favItem === false ? (
+                <BsSuitHeart
+                  className="text-red-400 hover:text-red-600"
+                  size="20px"
+                />
+              ) : (
+                <BsSuitHeartFill
+                  className="text-red-400 hover:text-red-600"
+                  size="20px"
+                />
+              )}
+            </div>
+            <p className="pl-2">{likesItem}</p>
+          </div>
+        </div>
+
         <p className="font-bold">&#36; {price}</p>
       </div>
     </React.Fragment>
@@ -24,16 +94,3 @@ const ItemCardCommon = ({ product, stars, price, img }) => {
 };
 
 export default ItemCardCommon;
-
-// FIXME: starCount cant be recognize as integer value, always in string format
-const StarCounter = ({ starCount }) => {
-  return (
-    <React.Fragment>
-      <div className="flex flex-row items-center">
-        {[...Array(parseInt(starCount))].map((item, key) => {
-          return <AiFillStar key={key} className="text-yellow-500" />;
-        })}
-      </div>
-    </React.Fragment>
-  );
-};

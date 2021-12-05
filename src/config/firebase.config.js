@@ -32,5 +32,4 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 export const firestore = getFirestore(firebaseApp);
 export const storage = getStorage(firebaseApp);
-
 export const authentication = getAuth(firebaseApp);

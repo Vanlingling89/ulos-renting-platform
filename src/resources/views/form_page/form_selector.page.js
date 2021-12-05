@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
+import AddRentalForm from "./forms/add_rental.form";
 import AddRequestForm from "./forms/add_request.form";
 
 export const FORM_TYPE = {
@@ -12,11 +13,7 @@ const FormSelectorPage = () => {
 
   switch (type) {
     case FORM_TYPE.rental:
-      return (
-        <div>
-          <h1>Rental</h1>
-        </div>
-      );
+      return <AddRentalForm />;
     case FORM_TYPE.request:
       return <AddRequestForm />;
     default:

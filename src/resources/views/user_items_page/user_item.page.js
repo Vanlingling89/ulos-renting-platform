@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useScrollTopHelper } from "../../../helpers/custom_hooks/use_scroll_top.helper";
 import UserItemProvider from "../../../providers/user_item_provider/user_item.context";
-import CardLoadingCommon from "../../common/card_loading.common";
 import { FORM_TYPE } from "../form_page/form_selector.page";
+import UserRentalsComponent from "./components/user_rental.component";
 import UserRequestsComponent from "./components/user_requests.component";
 
 const UserItemPage = () => {
@@ -28,9 +28,7 @@ const UserItemPage = () => {
             </div>
           </div>
           <br />
-          <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 lg:justify-items-stretch gap-6">
-            <CardLoadingCommon />
-          </div>
+          <UserRentalsComponent />
         </div>
         <br />
         <div className="mx-3 flex flex-col items-center lg:items-start lg:mx-0 my-6">

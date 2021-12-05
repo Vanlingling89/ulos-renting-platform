@@ -4,31 +4,31 @@ import { authentication } from "../../../../config/firebase.config";
 import { useGlobalContext } from "../../../../providers/global_provider/global.context";
 import { useUserItemContext } from "../../../../providers/user_item_provider/user_item.context";
 import { USERITEM_ACTION_TYPE } from "../../../../providers/user_item_provider/user_item.reducer";
-import RequestService from "../../../../service/request.service";
+import RentalService from "../../../../service/rental.service";
 import CardLoadingCommon from "../../../common/card_loading.common";
-import RequestCardCommon from "../../../common/request_card.common";
+import ItemCardCommon from "../../../common/item_card.common";
 
-const UserRequestsComponent = () => {
+const UserRentalsComponent = () => {
   const { global } = useGlobalContext();
   const { userItem, userItemDispatch } = useUserItemContext();
 
-  const fetchAllOwnRequest = () => {
+  const fetchAllOwnRental = () => {
     userItemDispatch({
       type: USERITEM_ACTION_TYPE.setBusy,
       payload: true,
     });
     onAuthStateChanged(authentication, async (user) => {
       if (user) {
-        await RequestService.getUserRequest(user.uid)
+        await RentalService.getUserRentals(user.uid)
           .then((res) => {
             if (res.length === 0) {
               userItemDispatch({
-                type: USERITEM_ACTION_TYPE.setUserRequest,
+                type: USERITEM_ACTION_TYPE.setUserRental,
                 payload: null,
               });
             } else {
               userItemDispatch({
-                type: USERITEM_ACTION_TYPE.setUserRequest,
+                type: USERITEM_ACTION_TYPE.setUserRental,
                 payload: res,
               });
             }
@@ -44,7 +44,7 @@ const UserRequestsComponent = () => {
   };
 
   useEffect(() => {
-    fetchAllOwnRequest();
+    fetchAllOwnRental();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [global.refresh]);
 
@@ -58,39 +58,35 @@ const UserRequestsComponent = () => {
     );
   }
 
-  if (userItem.userRequests === null) {
+  if (userItem.userRentals === null) {
     return (
       <div className="flex flex-row w-full h-80 justify-center items-center text-center">
-        <h2>You didnt create any request items...</h2>
+        <h2>You didnt create any for rental items...</h2>
       </div>
     );
   }
 
   return (
     <React.Fragment>
-      <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 lg:justify-items-stretch gap-6">
-        {userItem.loading && <CardLoadingCommon />}
-        {userItem.userRequests?.map((element) => {
-          let {
-            id_req,
-            id_user,
-            range_from,
-            range_to,
-            description,
-            location,
-            item,
-          } = element;
-
+      {userItem.loading && (
+        <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 lg:justify-items-stretch gap-6">
+          <CardLoadingCommon />
+        </div>
+      )}
+      <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-4 lg:justify-items-stretch gap-6">
+        {userItem.userRentals?.map((element) => {
+          let { item, likes, price, img_url, id_ren, img_path, id_user } =
+            element;
           return (
-            <RequestCardCommon
-              key={id_req}
-              id={id_req}
+            <ItemCardCommon
+              key={id_ren}
               user={id_user}
-              rentalProduct={item}
-              description={description}
-              priceFrom={range_from}
-              priceTo={range_to}
-              location={location}
+              id={id_ren}
+              item={item}
+              likes={likes.length}
+              price={price}
+              img={img_url}
+              path={img_path}
             />
           );
         })}
@@ -99,4 +95,4 @@ const UserRequestsComponent = () => {
   );
 };
 
-export default UserRequestsComponent;
+export default UserRentalsComponent;

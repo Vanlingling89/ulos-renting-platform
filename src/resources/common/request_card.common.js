@@ -29,7 +29,7 @@ const RequestCardCommon = ({
   };
   return (
     <React.Fragment>
-      <div className="">
+      <div className="succ-err-res">
         <div className="w-full transition delay-200 transform hover:-translate-y-2 border py-8 px-5 lg:p-10 shadow-xl rounded">
           <p className="lg:text-3xl font-bold truncate">User: {user}</p>
           <p>
