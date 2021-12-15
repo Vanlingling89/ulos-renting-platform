@@ -14,7 +14,7 @@ const HeroComponent = () => {
           <br className="hidden lg:block" />
           <p className="font-bold text-4xl lg:text-5xl" style={{ color: 'white' }}>WE GOT YOU COVERED!</p>
           <br />
-          <p style={{ color: 'white' }}> 
+          <p> 
             Fortifying your renting needs wherever you are. ULOS (Unified
             Lending Online Service) is an all around renting platform that
             caters to whatever you may be looking for in the market!<br /> <br />Sign Up

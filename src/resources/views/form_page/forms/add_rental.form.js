@@ -88,7 +88,7 @@ const AddRentalForm = () => {
           </div>
 
           <div className="my-1 w-full">
-            <label>Contact</label>
+            <label>Description</label>
             <textarea
               name="description"
               value={rentalForm.description}

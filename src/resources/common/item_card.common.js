@@ -89,7 +89,7 @@ const ItemCardCommon = ({
         </div>
 
         <p className="font-bold">P {price}</p>
-        <p className="font-bold">Contact: {description}</p>
+        <p className="font-bold">Description: {description}</p>
       </div>
     </React.Fragment>
   );
