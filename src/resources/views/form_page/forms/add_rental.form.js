@@ -26,6 +26,7 @@ const AddRentalForm = () => {
       description: "",
       img: "", //Note this key act as input validator only and its values is no use
       price: "",
+      contact: "",
     },
     validationSchema: Yup.object({
       item: Yup.string()

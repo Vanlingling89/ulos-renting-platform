@@ -8,13 +8,13 @@ const HeroComponent = () => {
     <React.Fragment>
       <div className="mx-3 lg:mx-0 grid grid-cols-1 lg:grid-cols-2 lg:gap-4">
         <div className="flex flex-col justify-center">
-          <p className="lg:font-bold text-xl lg:text-3xl">
+          <p className="lg:font-bold text-xl lg:text-3xl" style={{ color: 'white' }}>
             Looking for something?
           </p>
           <br className="hidden lg:block" />
-          <p className="font-bold text-4xl lg:text-5xl">WE GOT YOU COVERED!</p>
+          <p className="font-bold text-4xl lg:text-5xl" style={{ color: 'white' }}>WE GOT YOU COVERED!</p>
           <br />
-          <p>
+          <p style={{ color: 'white' }}> 
             Fortifying your renting needs wherever you are. ULOS (Unified
             Lending Online Service) is an all around renting platform that
             caters to whatever you may be looking for in the market!<br /> <br />Sign Up
