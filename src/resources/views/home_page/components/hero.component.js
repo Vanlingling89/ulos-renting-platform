@@ -17,7 +17,7 @@ const HeroComponent = () => {
           <p>
             Fortifying your renting needs wherever you are. ULOS (Unified
             Lending Online Service) is an all around renting platform that
-            caters to whatever you may be looking for in the market! Sign Up
+            caters to whatever you may be looking for in the market!<br /> <br />Sign Up
             today and enjoy looking for renting necessities that you may be
             using either for today or for any other day. Already have an
             account? Log In now and who knows what you might need to use later

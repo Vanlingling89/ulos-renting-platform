@@ -7,7 +7,7 @@ const FooterCommon = () => {
         <div className="lg:w-3/4 m-auto text-white py-10">
           <div className="my-4 mx-3 flex flex-col lg:flex-row justify-between  lg:mx-0">
             <div className="lg:w-1/2 mb-5 text-center lg:text-left">
-              <h1 className="font-bold">Red Store</h1>
+              <h1 className="font-bold">ULOS</h1>
               <br />
               <p className="text-gray-400">
                 Our goal is to provide a unified and easy-to-access platform for
