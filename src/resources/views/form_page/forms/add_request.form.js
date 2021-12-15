@@ -23,6 +23,7 @@ const AddRequestForm = () => {
       item: "",
       description: "",
       location: "",
+      Contact: "",
       range_from: "",
       range_to: "",
     },
@@ -32,6 +33,7 @@ const AddRequestForm = () => {
         .max(100, "Maximum of 100 characters"),
       description: validationString,
       location: validationString,
+      contact: validationString,
       range_from: validationNumber,
       range_to: validationNumber.moreThan(
         Yup.ref("range_from"),
@@ -126,6 +128,20 @@ const AddRequestForm = () => {
             {requestForm.touched.location && requestForm.errors.location ? (
               <span className="span-input-validation">
                 {requestForm.errors?.location}
+              </span>
+            ) : null}
+          </div>
+          
+          <div className="my-1 w-full">
+            <label>Contact</label>
+            <input
+              name="contact"
+              value={requestForm.contact}
+              onChange={requestForm.handleChange}
+            />
+            {requestForm.touched.contact && requestForm.errors.contact ? (
+              <span className="span-input-validation">
+                {requestForm.errors?.contact}
               </span>
             ) : null}
           </div>

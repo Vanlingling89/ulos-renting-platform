@@ -72,6 +72,7 @@ const DisplayRequestsComponent = () => {
             range_to,
             description,
             location,
+            contact,
             item,
           } = element;
 
@@ -85,6 +86,7 @@ const DisplayRequestsComponent = () => {
               priceFrom={range_from}
               priceTo={range_to}
               location={location}
+              contact={contact}
             />
           );
         })}

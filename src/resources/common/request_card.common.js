@@ -14,6 +14,7 @@ const RequestCardCommon = ({
   priceFrom,
   priceTo,
   location,
+  contact,
 }) => {
   const { global, globalDispatch } = useGlobalContext();
   const { renderSucceed, renderFail, renderBusy } = useResponseHelper();
@@ -47,6 +48,9 @@ const RequestCardCommon = ({
 
           <p>
             Location: <strong>{location}</strong>
+          </p>
+          <p>
+            Contact: <strong>{contact}</strong>
           </p>
 
           <br />

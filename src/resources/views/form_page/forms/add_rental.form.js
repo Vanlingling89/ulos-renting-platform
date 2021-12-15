@@ -26,7 +26,6 @@ const AddRentalForm = () => {
       description: "",
       img: "", //Note this key act as input validator only and its values is no use
       price: "",
-      contact: "",
     },
     validationSchema: Yup.object({
       item: Yup.string()
@@ -89,7 +88,7 @@ const AddRentalForm = () => {
           </div>
 
           <div className="my-1 w-full">
-            <label>Description</label>
+            <label>Contact</label>
             <textarea
               name="description"
               value={rentalForm.description}

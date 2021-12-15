@@ -10,6 +10,7 @@ const ItemCardCommon = ({
   user,
   item,
   likes,
+  description,
   price,
   img,
   favorite = false,
@@ -88,6 +89,7 @@ const ItemCardCommon = ({
         </div>
 
         <p className="font-bold">&#36; {price}</p>
+        <p className="font-bold">Contact: {description}</p>
       </div>
     </React.Fragment>
   );

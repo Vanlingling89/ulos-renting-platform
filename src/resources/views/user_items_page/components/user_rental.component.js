@@ -75,7 +75,7 @@ const UserRentalsComponent = () => {
       )}
       <div className="w-full grid justify-items-center grid-cols-1 lg:grid-cols-4 lg:justify-items-stretch gap-6">
         {userItem.userRentals?.map((element) => {
-          let { item, likes, price, img_url, id_ren, img_path, id_user } =
+          let { item, description, likes, price, img_url, id_ren, img_path, id_user } =
             element;
           return (
             <ItemCardCommon
@@ -84,6 +84,7 @@ const UserRentalsComponent = () => {
               id={id_ren}
               item={item}
               likes={likes.length}
+              description={description}
               price={price}
               img={img_url}
               path={img_path}

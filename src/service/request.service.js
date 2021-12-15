@@ -17,12 +17,13 @@ const REQUEST_QUERY = collection(firestore, "requests");
  * @param {object} values the form/input values
  */
 const createRequestItem = async (userID, values) => {
-  let { item, range_from, range_to, description, location } = values;
+  let { item, range_from, range_to, description, location, contact } = values;
   try {
     await addDoc(REQUEST_QUERY, {
       item,
       description,
       location,
+      contact,
       range_from: parseFloat(range_from, 10),
       range_to: parseFloat(range_to, 10),
       id_user: userID,
