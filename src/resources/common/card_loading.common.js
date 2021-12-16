@@ -21,7 +21,7 @@ export default CardLoadingCommon;
 const DisplayCardLoadingCommon = () => {
   return (
     <React.Fragment>
-      <div className="bg-white rounded shadow-xl">
+      <div className="bg-yellow rounded shadow-xl">
         <div className="h-64 bg-gray-300 rounded-tr rounded-tl animate-pulse"></div>
 
         <div className="p-5">
